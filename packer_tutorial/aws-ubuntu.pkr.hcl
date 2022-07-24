@@ -40,5 +40,8 @@ build {
       "echo \"FOO is $FOO\" > example.txt",
     ]
   }
+  provisioner "shell" {
+    inLine = ["echo This provisioner runs last"]
+  }
 }
 
