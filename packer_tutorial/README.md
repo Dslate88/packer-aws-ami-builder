@@ -9,4 +9,12 @@
 
 # AMI Provisioner
 This allows you to modify the image with shell scripts or file uploads.
-- `build` blocks can contain a `provisioner` to add extra configuration steps on the ami, but it requires `ssh_username` specified in the `source` that its building.  This creates temp ssh keys for it to login and execute the logic in the `provisioner`.
+- `build` blocks can contain a `provisioner` to add extra configuration steps on the ami, but it requires `ssh_username` specified in the `source` that its building.  This creates temp ssh keys for it to login and execute the logic in the `provisioner`
+
+# Variables
+- two types:  input and local (standard terraform...)
+- input var assignement precedence:  defaults, env_vars, var file(s) cmd-line flag
+- var file example:
+  - `echo ami_prefix = "\"my_ami_prefix"\" >> example.pkvars.hcl`
+  - `packer build --var-file=example.pkvars.hcl aws-ubuntu.pkr.hcl`
+  - `packer` auto loads files that pattern match `*.auto.pkvars.hcl`, so `mv example.pkvars.hcl example.auto.pkvars.hcl` then run `packer build aws-ubuntu.pkr.hcl` without the `--var-file`
