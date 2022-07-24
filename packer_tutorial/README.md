@@ -13,8 +13,18 @@ This allows you to modify the image with shell scripts or file uploads.
 
 # Variables
 - two types:  input and local (standard terraform...)
-- input var assignement precedence:  defaults, env_vars, var file(s) cmd-line flag
+- input var assignement precedence:  `defaults`<`env_vars`<`var file(s)`<`cmd-line flag`
+- defaults example:
+  - ```
+    variable "ami_prefix" {
+      type = string
+      default = "this is my default name"
+    }
+   ```
 - var file example:
   - `echo ami_prefix = "\"my_ami_prefix"\" >> example.pkvars.hcl`
   - `packer build --var-file=example.pkvars.hcl aws-ubuntu.pkr.hcl`
   - `packer` auto loads files that pattern match `*.auto.pkvars.hcl`, so `mv example.pkvars.hcl example.auto.pkvars.hcl` then run `packer build aws-ubuntu.pkr.hcl` without the `--var-file`
+- cmd-line flag example:
+  - `packer build --var ami_prefix=learn-packer-aws-redis-var-flag`
+
