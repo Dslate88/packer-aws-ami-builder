@@ -1,4 +1,11 @@
 # Summary
+- repo used locally to build private AMI's via `Packer`.  
+- this enables you to create the environment you need for your application adn then reference it later during ec2 deployments
+- key value prop is getting your ami built for private subnet application without a nat gateway so that its more secure
+  - If the private ec2 instance cannot route out to the IGW then it cant install anything after the application has been spun up
+
+# Development recommendations
+- use `skip_create_ami` to save time while you build out the `pkr.hcl` file
 
 # Reference docs
 - extensive ebs builder [docs](https://www.packer.io/plugins/builders/amazon/ebs)
