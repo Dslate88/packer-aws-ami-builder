@@ -1,3 +1,9 @@
+# Summary
+
+# Reference docs
+- extensive ebs builder [docs](https://www.packer.io/plugins/builders/amazon/ebs)
+
+
 # AMI Build steps
 - create `*.pkr.hcl` file with packer, source(s), build(s)
 - make sure `~/.credrc` is configured with aws credentials
