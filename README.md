@@ -1,17 +1,10 @@
 # Summary
-- repo used locally to build private AMI's via `Packer`.  
-- this enables you to create the environment you need for your application adn then reference it later during ec2 deployments
-- key value prop is getting your ami built for private subnet application without a nat gateway so that its more secure
-  - If the private ec2 instance cannot route out to the IGW then it cant install anything after the application has been spun up
 
-# Development recommendations
-- use `skip_create_ami` to save time while you build out the `pkr.hcl` file
-
-# Reference docs
-- extensive ebs builder [docs](https://www.packer.io/plugins/builders/amazon/ebs)
+## Reference docs
+- [ami_locator](https://cloud-images.ubuntu.com/locator/ec2/)
 
 
-# AMI Build steps
+## AMI Build steps
 - create `*.pkr.hcl` file with packer, source(s), build(s)
 - make sure `~/.credrc` is configured with aws credentials
 - run `packer init .` in directory with `*pkr.hcl` (pulls plugins needed)
@@ -20,11 +13,11 @@
 - run `packer build <my-ami.pkr.hcl>` to build the ami
 - `packer build` will output the `ami-ID` when it finished the build
 
-# AMI Provisioner
+## AMI Provisioner
 This allows you to modify the image with shell scripts or file uploads.
 - `build` blocks can contain a `provisioner` to add extra configuration steps on the ami, but it requires `ssh_username` specified in the `source` that its building.  This creates temp ssh keys for it to login and execute the logic in the `provisioner`
 
-# Variables
+## Variables
 - two types:  input and local (standard terraform...)
 - input var assignement precedence:  `defaults`<`env_vars`<`var file(s)`<`cmd-line flag`
 - defaults example:
